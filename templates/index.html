@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="navbar">
+        <img src="{{ url_for('static', filename='logo.png') }}">
+        <h1>AutoVox</h1>
+        <div class="container">
+            <a href="{{ url_for('invite') }}">Invite</a>
+            <a href="{{ url_for('docs') }}">Docs</a>
+            <a href="{{ url_for('status') }}">Status</a>
+            <a href="{{ url_for('support') }}">Support</a>
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+        </div>
+    </div>
+    <div class="content">
+        <div class="bot">
+            <h1>AutoVox</h1>
+            <p>AutoVox is a powerful Discord bot designed to simplify server management and enhance community engagement, letting you focus on what matters most..</p>
+            <div class="buttons">
+                <button id="invite">Invite</button>
+                <a href="#features" id="features-link">Features</a>
+            </div>
+        </div>
+        <div class="example">
+            <img src="{{ url_for('static', filename='example.png') }}">
+        </div>
+    </div>
+    <div class="stats">
+        <div class="container">
+            <p1>{{ users }}</p1>
+            <p2>Users</p2>
+        </div>
+        <div class="container">
+            <p1>{{ servers }}</p1>
+            <p2>Servers</p2>
+        </div>
+        <div class="container">
+            <p1>{{ commands }}</p1>
+            <p2>Commands</p2>
+        </div>
+    </div>
+    <div class="features" id="features">
+        <h1>Features</h1>
+        <p1>Soon...</p1>
+    </div>
+    <div class="footer">
+        <p>&copy; 2024 AutoVox</p>
+        <a href="{{ url_for('privacy') }}">Privacy Policy</a>
+        <a href="{{ url_for('terms') }}">Terms of Service</a>
+    </div>
+{% endblock %}
+{% block scripts %}
+    <script>
+        document.getElementById('invite').addEventListener('click', () => {
+            window.location.href = "{{ url_for('invite') }}";
+        });
+        document.getElementById('features-link').addEventListener('click', (event) => {
+            event.preventDefault();
+            document.getElementById('features').scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+{% endblock %}

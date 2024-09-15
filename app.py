@@ -1,7 +1,11 @@
 from flask import Flask, render_template, redirect, request, send_from_directory, url_for, session
 import os
-from waitress import serve  # pip install waitress
-from dotenv import load_dotenv  # pip install python-dotenv
+from waitress import serve
+from dotenv import load_dotenv 
+
+import database
+
+load_dotenv()
 
 def get_app():
     app = Flask(__name__)
@@ -13,11 +17,12 @@ app = get_app()
 
 @app.route("/")
 def index():
+    data = database.execute_read_query('SELECT * FROM stats where id = 1')
     context = {
         'title': 'AutoVox',
-        'users': 5530,
-        'servers': 5,
-        'commands': 23
+        'users': f"{data[0][1]:,}",
+        'servers': f"{data[0][2]:,}",
+        'commands': f"{data[0][3]:,}"
     }
     try:
         return render_template('index.html', **context)
@@ -65,6 +70,18 @@ def status():
 @app.route("/dashboard")
 def dashboard():
     return redirect(url_for('soon'))
+
+
+@app.route("/stats")
+def stats():
+    stats = database.execute_read_query('SELECT * FROM stats')
+    data = {
+        'users': stats[0][0],
+        'servers': stats[0][1],
+        'commands': stats[0][2]
+    }
+    return data
+    
 
 
 if __name__ == "__main__":

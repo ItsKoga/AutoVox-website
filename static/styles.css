@@ -14,6 +14,10 @@ h1 {
     margin: 20px;
 }
 
+.no-scroll {
+    overflow: hidden;
+}
+
 .soon {
     display: flex;
     flex-direction: column;
@@ -48,14 +52,13 @@ h1 {
 .navbar {
     display: flex;
     align-items: center;
-    margin: 10px;
     font-size: 40px;
-    padding: 10px;
 }
 
 .navbar img {
     width: 70px;
     height: 70px;
+    padding: 10px;
 }
 
 .navbar .container {
@@ -69,15 +72,51 @@ h1 {
 .navbar a {
     color: #ffffff;
     text-decoration: none;
-    font-size: 25px;
+    font-size: 18px;
+    font-weight: 500;
 }
 
 .navbar a:hover {
     color: #9c59b6;
 }
 
+.navbar .burger {
+    display: flex;
+    color: #ffffff;
+    background-color: #1a282f;
+    border: none;
+    padding: 10px;
+    font-size: 25px;
+    margin-left: auto;
+}
+
+.navbar .burger:hover {
+    color: #9c59b6;
+}
+
+.navbar .burger-menu {
+    display: none;
+    position: absolute;
+    top: 0px;
+    background-color: #222f35;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: center;
+}
+
+.navbar .burger-menu a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #ffffff;
+}
+
+
+
 .content {
-    margin: 20px;
     margin-top: 120px;
     display: flex;
     flex-direction: row;
@@ -91,6 +130,7 @@ h1 {
     flex-direction: column;
     justify-content: space-between;
     width: 50%;
+    padding: 20px;
 }
 
 .content .bot h1 {
@@ -199,19 +239,155 @@ h1 {
     display: flex;
     flex-direction: row;
     place-items: center;
-    justify-content: space-between;
+    justify-content: center;
     font-size: 20px;
-    margin: 20px;
     margin-top: 150px;
-    padding: 10px 400px;
+    margin: auto;
+    text-align: center;
 }
 
 .footer a {
     color: #b1b1b1;
     text-decoration: none;
+    display: block;
+    text-align: center;
+    padding: 20px;
 }
 
 .footer a:hover {
     color: #9c59b6;
 }
 
+.footer p {
+    color: #b1b1b1;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    padding: 20px;
+}
+
+
+@media (min-width: 1201px) {
+    .navbar .burger {
+        display: none;
+    }
+}
+
+@media (max-width: 1200px) {
+    .navbar .container {
+        display: none;
+    }
+    .content .example {
+        display: none;
+    }
+    .content .bot {
+        width: 100%;
+    }
+    .content .bot p{
+        width: 100%;
+        font-size: 32px !important;
+    }
+    .stats .container p1 {
+        font-size: 40px;
+    }
+    .stats .container p2 {
+        font-size: 20px;
+    }
+    .footer {
+        font-size: 15px;
+    }
+    .footer a {
+        padding: 10px;
+    }
+}
+
+@media (min-width: 1920px) {
+    .navbar a {
+        font-size: 24px;
+    }
+}
+
+@media (min-width: 2140px) {
+    .navbar a {
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 1420px) {
+    .content .bot p {
+        font-size: 25px;
+    }
+}
+
+@media (max-width: 800px) {
+    .stats {
+        padding: 10px 90px;
+    }
+    .content .bot p {
+        font-size: 20px;
+    }
+    .stats .container p1 {
+        font-size: 30px;
+    }
+    .stats .container p2 {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 600px) {
+    .stats {
+        padding: 10px 50px;
+    }
+    .content .bot p {
+        font-size: 15px;
+    }
+    .stats .container p1 {
+        font-size: 22px;
+    }
+    .stats .container p2 {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 1200px) {
+    body {
+        width: 100%;
+        margin: 0;
+    }
+}
+
+@media (max-width: 900px) {
+    .soon h1 {
+        font-size: 40px;
+    }
+    .soon p1 {
+        font-size: 20px;
+    }
+    .soon a {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 700px) {
+    .soon h1 {
+        font-size: 30px;
+    }
+    .soon p1 {
+        font-size: 15px;
+    }
+    .soon a {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 500px) {
+    .soon h1 {
+        font-size: 20px;
+    }
+    .soon p1 {
+        font-size: 10px;
+    }
+    .soon a {
+        font-size: 10px;
+    }
+}

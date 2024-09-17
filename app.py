@@ -1,4 +1,6 @@
 from flask import Flask, render_template, redirect, request, send_from_directory, url_for, session
+from flask_mobility import Mobility
+from flask_mobility.decorators import mobile_template
 import os
 from waitress import serve
 from dotenv import load_dotenv 
@@ -14,18 +16,21 @@ def get_app():
     return app
 
 app = get_app()
+Mobility(app)
 
 @app.route("/")
-def index():
+@mobile_template('index.html')
+def index(template):
     data = database.execute_read_query('SELECT * FROM stats where id = 1')
     context = {
         'title': 'AutoVox',
         'users': f"{data[0][1]:,}",
         'servers': f"{data[0][2]:,}",
-        'commands': f"{data[0][3]:,}"
+        'commands': f"{data[0][3]:,}",
+        'request': request
     }
     try:
-        return render_template('index.html', **context)
+        return render_template(template, **context)
     except Exception as e:
         return str(e)
     
@@ -37,6 +42,10 @@ def invite():
 @app.route("/support")
 def support():
     return redirect('https://discord.gg/8HbjJBGWBd')
+
+@app.route("/vote")
+def vote():
+    return redirect('https://top.gg/bot/1281554625744470127/vote')
 
 @app.route("/terms")
 def terms():

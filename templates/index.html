@@ -1,13 +1,28 @@
 {% extends 'base.html' %}
+{% block head %}
+{% endblock %}
 {% block content %}
     <div class="navbar">
         <img src="{{ url_for('static', filename='logo.png') }}">
         <h1>AutoVox</h1>
+        <button class="burger" id="burger">☰</button>
+        <div class="burger-menu" id="burger-menu">
+            <a></a>
+            <a href="{{ url_for('invite') }}">Invite</a>
+            <a href="{{ url_for('docs') }}">Docs</a>
+            <a href="{{ url_for('status') }}">Status</a>
+            <a href="{{ url_for('support') }}">Support</a>
+            <a href="{{ url_for('vote') }}">Vote</a>
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+            <a></a> 
+            <a></a> 
+        </div>
         <div class="container">
             <a href="{{ url_for('invite') }}">Invite</a>
             <a href="{{ url_for('docs') }}">Docs</a>
             <a href="{{ url_for('status') }}">Status</a>
             <a href="{{ url_for('support') }}">Support</a>
+            <a href="{{ url_for('vote') }}">Vote</a>
             <a href="{{ url_for('dashboard') }}">Dashboard</a>
         </div>
     </div>
@@ -53,9 +68,31 @@
         document.getElementById('invite').addEventListener('click', () => {
             window.location.href = "{{ url_for('invite') }}";
         });
+
         document.getElementById('features-link').addEventListener('click', (event) => {
             event.preventDefault();
             document.getElementById('features').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        document.getElementById('burger').addEventListener('click', () => {
+            const burgerMenu = document.getElementById('burger-menu');
+            const body = document.body;
+            if (burgerMenu.style.display === 'none' || burgerMenu.style.display === '') {
+                burgerMenu.style.display = 'block';
+                body.classList.add('no-scroll');
+            } else {
+                burgerMenu.style.display = 'none';
+                body.classList.remove('no-scroll');
+            }
+        });
+
+        document.addEventListener('click', (event) => {
+            const burgerMenu = document.getElementById('burger-menu');
+            const burgerButton = document.getElementById('burger');
+            if (!burgerMenu.contains(event.target) && !burgerButton.contains(event.target)) {
+                burgerMenu.style.display = 'none';
+                document.body.classList.remove('no-scroll');
+            }
         });
     </script>
 {% endblock %}

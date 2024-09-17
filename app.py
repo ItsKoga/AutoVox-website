@@ -1,6 +1,4 @@
 from flask import Flask, render_template, redirect, request, send_from_directory, url_for, session
-from flask_mobility import Mobility
-from flask_mobility.decorators import mobile_template
 import os
 from waitress import serve
 from dotenv import load_dotenv 
@@ -16,11 +14,9 @@ def get_app():
     return app
 
 app = get_app()
-Mobility(app)
 
 @app.route("/")
-@mobile_template('index.html')
-def index(template):
+def index():
     data = database.execute_read_query('SELECT * FROM stats where id = 1')
     context = {
         'title': 'AutoVox',
@@ -30,7 +26,7 @@ def index(template):
         'request': request
     }
     try:
-        return render_template(template, **context)
+        return render_template('index.html', **context)
     except Exception as e:
         return str(e)
     

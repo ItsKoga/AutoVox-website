@@ -17,7 +17,7 @@ app = get_app()
 
 @app.route("/")
 def index():
-    data = database.execute_read_query('SELECT * FROM stats where id = 1')
+    data = database.execute_read_query('SELECT * FROM stats')
     context = {
         'title': 'AutoVox',
         'users': f"{data[0][1]:,}",
@@ -66,11 +66,11 @@ def soon():
 
 @app.route("/docs")
 def docs():
-    return redirect(url_for('soon'))
+    return redirect('https://github.com/ItsKoga/AutoVox/wiki')
 
 @app.route("/status")
 def status():
-    return redirect(url_for('soon'))
+    return redirect('https://kuma.itskoga.de/status/autovox')
 
 @app.route("/dashboard")
 def dashboard():
@@ -87,9 +87,12 @@ def stats():
     }
     return data
     
+@app.route("/progressbar/<filename>")
+def progress_bar(filename):
+    return send_from_directory('assets/progressbar', filename)
 
 
 if __name__ == "__main__":
     print("Autovox is online!")
-    serve(app, host="0.0.0.0", port=8000)
-    #app.run(debug=True)
+    #serve(app, host="0.0.0.0", port=8000)
+    app.run(debug=True)
